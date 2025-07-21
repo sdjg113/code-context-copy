@@ -30,6 +30,71 @@ function activate(context) {
     });
     context.subscriptions.push(copyOpenTabsPathAndContentCmd);
 
+    // Copy all open tabs paths from all editor groups
+    let copyAllTabsPathsCmd = vscode.commands.registerCommand('code-context-copy.copyAllTabsPaths', async () => {
+        const paths = [];
+        for (const tabGroup of vscode.window.tabGroups.all) {
+            for (const tab of tabGroup.tabs) {
+                if (tab.input && tab.input.uri instanceof vscode.Uri) {
+                    paths.push(tab.input.uri);
+                }
+            }
+        }
+        await copyFilePaths(paths);
+    });
+    context.subscriptions.push(copyAllTabsPathsCmd);
+
+    // Copy open tabs paths from first editor group
+    let copyFirstGroupTabsPathsCmd = vscode.commands.registerCommand('code-context-copy.copyFirstGroupTabsPaths', async () => {
+        const tabGroups = vscode.window.tabGroups.all;
+        if (tabGroups.length < 1) {
+            vscode.window.showInformationMessage('No editor groups found.');
+            return;
+        }
+        const paths = [];
+        for (const tab of tabGroups[0].tabs) {
+            if (tab.input && tab.input.uri instanceof vscode.Uri) {
+                paths.push(tab.input.uri);
+            }
+        }
+        await copyFilePaths(paths);
+    });
+    context.subscriptions.push(copyFirstGroupTabsPathsCmd);
+
+    // Copy open tabs paths from second editor group
+    let copySecondGroupTabsPathsCmd = vscode.commands.registerCommand('code-context-copy.copySecondGroupTabsPaths', async () => {
+        const tabGroups = vscode.window.tabGroups.all;
+        if (tabGroups.length < 2) {
+            vscode.window.showInformationMessage('Second editor group not found.');
+            return;
+        }
+        const paths = [];
+        for (const tab of tabGroups[1].tabs) {
+            if (tab.input && tab.input.uri instanceof vscode.Uri) {
+                paths.push(tab.input.uri);
+            }
+        }
+        await copyFilePaths(paths);
+    });
+    context.subscriptions.push(copySecondGroupTabsPathsCmd);
+
+    // Copy open tabs paths from third editor group
+    let copyThirdGroupTabsPathsCmd = vscode.commands.registerCommand('code-context-copy.copyThirdGroupTabsPaths', async () => {
+        const tabGroups = vscode.window.tabGroups.all;
+        if (tabGroups.length < 3) {
+            vscode.window.showInformationMessage('Third editor group not found.');
+            return;
+        }
+        const paths = [];
+        for (const tab of tabGroups[2].tabs) {
+            if (tab.input && tab.input.uri instanceof vscode.Uri) {
+                paths.push(tab.input.uri);
+            }
+        }
+        await copyFilePaths(paths);
+    });
+    context.subscriptions.push(copyThirdGroupTabsPathsCmd);
+
 
     let copyCurrentFileCmd = vscode.commands.registerTextEditorCommand('code-context-copy.copyCurrentFilePathAndContent', async (editor) => {
         await copyFilePathAndContent([editor.document.uri]);
@@ -78,6 +143,30 @@ async function copyFilePathAndContent(files) {
     }
 
     await vscode.env.clipboard.writeText(copyStrings.join(''));
+}
+
+async function copyFilePaths(files) {
+    if (!files || files.length === 0) {
+        vscode.window.showInformationMessage('No file(s) selected.');
+        return;
+    }
+
+    const workspaceFolders = vscode.workspace.workspaceFolders;
+    if (!workspaceFolders) {
+        vscode.window.showInformationMessage('No workspace is opened.');
+        return;
+    }
+
+    const workspaceRoot = workspaceFolders[0].uri.fsPath;
+    const paths = [];
+
+    for (const fileUri of files) {
+        const normalizedPath = '/' + path.relative(workspaceRoot, fileUri.fsPath).split(path.sep).join('/');
+        paths.push(normalizedPath);
+    }
+
+    await vscode.env.clipboard.writeText(paths.join('\n'));
+    vscode.window.showInformationMessage(`Copied ${paths.length} file path(s) to clipboard.`);
 }
 
 

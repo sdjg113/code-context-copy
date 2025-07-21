@@ -2,7 +2,7 @@
   "name": "code-context-copy",
   "displayName": "Code Context Copy",
   "description": "Copy file paths, contents, and workspace problems to clipboard for AI assistants",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "publisher": "EdKing",
   "icon": "images/copy_logo.png",
   "galleryBanner": {
@@ -28,6 +28,22 @@
         "title": "Code Context Copy: All Open Tabs Path and Content"
       },
       {
+        "command": "code-context-copy.copyAllTabsPaths",
+        "title": "Code Context Copy: All Open Tabs Paths (All Groups)"
+      },
+      {
+        "command": "code-context-copy.copyFirstGroupTabsPaths",
+        "title": "Code Context Copy: All Open Tabs Paths (First Group)"
+      },
+      {
+        "command": "code-context-copy.copySecondGroupTabsPaths",
+        "title": "Code Context Copy: All Open Tabs Paths (Second Group)"
+      },
+      {
+        "command": "code-context-copy.copyThirdGroupTabsPaths",
+        "title": "Code Context Copy: All Open Tabs Paths (Third Group)"
+      },
+      {
         "command": "code-context-copy.copyAllProblems",
         "title": "Code Context Copy: All Current VS Code Problems"
       },
@@ -48,6 +64,11 @@
         "when": "editorTextFocus"
       },
       {
+        "command": "code-context-copy.copyAllTabsPaths",
+        "key": "ctrl+alt+shift+k",
+        "when": "editorTextFocus"
+      },
+      {
         "command": "code-context-copy.copyAllProblems",
         "key": "ctrl+alt+shift+p",
         "when": "editorTextFocus"
@@ -61,6 +82,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/tsmith165/copy_file_path_and_contents.git"
+    "url": "https://github.com/sdjg113/code-context-copy"
   }
 }
