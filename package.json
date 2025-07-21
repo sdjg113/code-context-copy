@@ -1,0 +1,66 @@
+{
+  "name": "code-context-copy",
+  "displayName": "Code Context Copy",
+  "description": "Copy file paths, contents, and workspace problems to clipboard for AI assistants",
+  "version": "0.0.1",
+  "publisher": "EdKing",
+  "icon": "images/copy_logo.png",
+  "galleryBanner": {
+    "color": "#222222",
+    "theme": "dark",
+    "path": "images/copy_full.png"
+  },
+  "engines": {
+    "vscode": "^1.82.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "main": "src/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "code-context-copy.copyCurrentFilePathAndContent",
+        "title": "Code Context Copy: Current File Path and Content"
+      },
+      {
+        "command": "code-context-copy.copyOpenTabsPathAndContent",
+        "title": "Code Context Copy: All Open Tabs Path and Content"
+      },
+      {
+        "command": "code-context-copy.copyAllProblems",
+        "title": "Code Context Copy: All Current VS Code Problems"
+      },
+      {
+        "command": "code-context-copy.copyCurrentFileProblems",
+        "title": "Code Context Copy: Current File Problems Only"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "code-context-copy.copyCurrentFilePathAndContent",
+        "key": "ctrl+alt+c",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "code-context-copy.copyOpenTabsPathAndContent",
+        "key": "ctrl+alt+a",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "code-context-copy.copyAllProblems",
+        "key": "ctrl+alt+shift+p",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "code-context-copy.copyCurrentFileProblems",
+        "key": "ctrl+alt+p",
+        "when": "editorTextFocus"
+      }
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tsmith165/copy_file_path_and_contents.git"
+  }
+}
