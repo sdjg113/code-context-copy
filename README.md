@@ -1,24 +1,43 @@
 # Code Context Copy
 
-![Code Context Copy logo](images/copy_full.png)
+![Code Context Copy logo](images/og.png)
 
 ## Description
 
 A VS Code extension that helps you quickly copy code context - including file paths, contents, and workspace problems. Perfect for sharing context with AI coding assistants like Claude Code, GitHub Copilot, or ChatGPT. Just hit a key and paste!
 
+Inspired by
+https://github.com/ArturoDent/problems-copy
+https://github.com/tsmith165/copy_file_path_and_contents
+
 ## Features
 
-- **Copy File Path and Content** - Copy file paths and contents to clipboard
-- **Copy Open Tabs Path and Content** - Copy all open tabs with their paths and contents
-- **Copy All Problems** - Copy all current problems/diagnostics from the VS Code Problems panel
-- **Copy Current File Problems** - Copy problems/diagnostics from the current file only
+### File Content Commands
+
+- **Copy Current File Path and Content** - Copy the active file's path and full content to clipboard
+- **Copy All Open Tabs Path and Content** - Copy all open tabs with their paths and contents
+
+### Tab Path Commands
+
+- **Copy All Open Tabs Paths (All Groups)** - Copy file paths from all open tabs across all editor groups
+- **Copy All Open Tabs Paths (First Group)** - Copy file paths from tabs in the first editor group only
+- **Copy All Open Tabs Paths (Second Group)** - Copy file paths from tabs in the second editor group only
+- **Copy All Open Tabs Paths (Third Group)** - Copy file paths from tabs in the third editor group only
+
+### Problems/Diagnostics Commands
+
+- **Copy All Current VS Code Problems** - Copy all problems/diagnostics from the VS Code Problems panel
+- **Copy Current File Problems Only** - Copy problems/diagnostics from the current file only
 
 ### Keyboard shortcuts:
 
 - `ctrl+alt+c` - Copy current file path and content
 - `ctrl+alt+a` - Copy all open tabs path and content
+- `ctrl+alt+shift+k` - Copy all tabs paths (all groups)
 - `ctrl+alt+shift+p` - Copy all current VS Code problems
 - `ctrl+alt+p` - Copy current file problems only
+
+> **Tip:** To see all available commands and their keybindings, open the Command Palette (`Ctrl+Shift+P` or `Cmd+Shift+P`) and search for "code context copy"
 
 ## Building and Installing Locally
 
@@ -30,14 +49,7 @@ A VS Code extension that helps you quickly copy code context - including file pa
    npm install -g @vscode/vsce
    ```
 
-2. **Install Dependencies**
-   Navigate to the extension directory and install the required dependencies:
-
-   ```bash
-   npm install
-   ```
-
-3. **Package the Extension**
+2. **Package the Extension**
    Create a .vsix file:
    ```bash
    vsce package
@@ -78,6 +90,15 @@ A VS Code extension that helps you quickly copy code context - including file pa
 1. Open a file with problems/diagnostics
 2. Use `ctrl+alt+p` keyboard shortcut
 3. Problems from the current file only will be copied in the same simple format
+
+### Copy Tab Paths
+
+1. Use `ctrl+alt+shift+k` to copy paths from all open tabs across all editor groups
+2. Or use the command palette to copy paths from specific groups:
+   - "Code Context Copy: All Open Tabs Paths (First Group)"
+   - "Code Context Copy: All Open Tabs Paths (Second Group)"
+   - "Code Context Copy: All Open Tabs Paths (Third Group)"
+3. Tab paths will be copied to clipboard, one per line
 
 The problems output format includes:
 

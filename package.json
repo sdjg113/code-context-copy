@@ -2,13 +2,13 @@
   "name": "code-context-copy",
   "displayName": "Code Context Copy",
   "description": "Copy file paths, contents, and workspace problems to clipboard for AI assistants",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "publisher": "EdKing",
-  "icon": "images/copy_logo.png",
+  "icon": "images/logo.png",
   "galleryBanner": {
     "color": "#222222",
     "theme": "dark",
-    "path": "images/copy_full.png"
+    "path": "images/og.png"
   },
   "engines": {
     "vscode": "^1.82.0"
