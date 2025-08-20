@@ -2,7 +2,7 @@
   "name": "code-context-copy",
   "displayName": "Code Context Copy",
   "description": "Copy file paths, contents, and workspace problems to clipboard for AI assistants",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "publisher": "EdKing",
   "icon": "images/logo.png",
   "galleryBanner": {
@@ -50,6 +50,14 @@
       {
         "command": "code-context-copy.copyCurrentFileProblems",
         "title": "Code Context Copy: Current File Problems Only"
+      },
+      {
+        "command": "code-context-copy.copyCurrentFilePath",
+        "title": "Code Context Copy: Current File Path Only"
+      },
+      {
+        "command": "code-context-copy.copyFirstGroupActiveTabPath",
+        "title": "Code Context Copy: Active Tab Path (First Group Only)"
       }
     ],
     "keybindings": [
@@ -76,6 +84,16 @@
       {
         "command": "code-context-copy.copyCurrentFileProblems",
         "key": "ctrl+alt+p",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "code-context-copy.copyCurrentFilePath",
+        "key": "ctrl+alt+shift+c",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "code-context-copy.copyFirstGroupActiveTabPath",
+        "key": "ctrl+alt+shift+1",
         "when": "editorTextFocus"
       }
     ]

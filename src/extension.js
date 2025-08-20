@@ -101,6 +101,40 @@ function activate(context) {
     });
     context.subscriptions.push(copyCurrentFileCmd);
 
+    let copyCurrentFilePathCmd = vscode.commands.registerTextEditorCommand('code-context-copy.copyCurrentFilePath', async (editor) => {
+        await copyFilePaths([editor.document.uri]);
+    });
+    context.subscriptions.push(copyCurrentFilePathCmd);
+
+    // Copy active tab path from first editor group only
+    let copyFirstGroupActiveTabPathCmd = vscode.commands.registerCommand('code-context-copy.copyFirstGroupActiveTabPath', async () => {
+        const tabGroups = vscode.window.tabGroups.all;
+        if (tabGroups.length < 1) {
+            vscode.window.showInformationMessage('No editor groups found.');
+            return;
+        }
+        
+        // Get the first tab group (index 0)
+        const firstGroup = tabGroups[0];
+        
+        // Find the active (visible) tab in the first group
+        let activeTab = null;
+        for (const tab of firstGroup.tabs) {
+            if (tab.isActive) {
+                activeTab = tab;
+                break;
+            }
+        }
+        
+        if (!activeTab || !activeTab.input || !activeTab.input.uri) {
+            vscode.window.showInformationMessage('No active tab found in the first editor group.');
+            return;
+        }
+        
+        await copyFilePaths([activeTab.input.uri]);
+    });
+    context.subscriptions.push(copyFirstGroupActiveTabPathCmd);
+
     // Add problems copying commands
     let copyAllProblemsCmd = vscode.commands.registerCommand('code-context-copy.copyAllProblems', async () => {
         await copyAllProblems();
